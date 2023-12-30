@@ -22,10 +22,6 @@ db.on("error", () => {
   console.log("Error while connecting to DataBase");
 });
 
-// db.once("open", () => {
-//   console.log("Connected to DataBase");
-// });
-
 const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
