@@ -102,7 +102,7 @@ exports.login = async (req, res) => {
   });
 };
 
-/* logout function code start here */
+/* logout function code  */
 exports.logout = async (req, res) => {
   return res.status(200).send({
     msg: "Logged out!",
