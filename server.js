@@ -3,9 +3,10 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
 const app = require("./app");
-
+// const express = require("express");
+// const app = express();
 //middlewares
-app.use(cors());
+// app.use(cors());
 
 //database connection
 const DB_URL = process.env.MONGODB_URL.replace(
