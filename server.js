@@ -3,6 +3,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
 const app = require("./app");
+
 // const express = require("express");
 // const app = express();
 //middlewares
@@ -24,6 +25,8 @@ db.on("error", () => {
 });
 
 const PORT = process.env.PORT || 8080;
+
+// require("./routes/user.route")(app);
 
 app.listen(PORT, () => {
   console.log(`Server is started on port ${PORT}`);
