@@ -50,7 +50,7 @@ exports.signup = async (req, res) => {
   try {
     const user = await User.create(userObj);
 
-    const token = jwt.sign({ id: user.username }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRES_IN,
     });
     user.password = "";
@@ -90,7 +90,7 @@ exports.login = async (req, res) => {
     });
   }
 
-  const token = jwt.sign({ id: user.username }, process.env.JWT_SECRET, {
+  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 
