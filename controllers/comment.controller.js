@@ -3,10 +3,10 @@ const Comment = require("../models/comment.model");
 const User = require("../models/user.model");
 
 exports.addComment = async (req, res) => {
-  const comment = await Comment.findById(req.body.postId);
+  const post = await Post.findById(req.body.postId);
   const loggedInUser = await User.findById(req._id);
 
-  if (!comment) {
+  if (!post) {
     return res.status(400).send({
       msg: "This Post does not exist.",
     });

@@ -55,7 +55,7 @@ exports.signup = async (req, res) => {
     });
     user.password = "";
 
-    res.header[("x-auth-token", token)].status(200).send({
+    res.header("x-auth-token", token).status(200).send({
       msg: "Register Success!",
       accesss_token: token,
       user: user,

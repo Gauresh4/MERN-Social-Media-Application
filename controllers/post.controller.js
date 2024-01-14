@@ -133,6 +133,7 @@ exports.deletePost = async (req, res) => {
   }
 };
 
+/* Like Post*/
 exports.likePost = async (req, res) => {
   try {
     const loggedInUser = await User.findById(req._id);
@@ -230,7 +231,7 @@ exports.getUserPost = async (req, res) => {
   }
 };
 
-/* save Post function code start here */
+/* Save a particular post */
 exports.savePost = async (req, res) => {
   try {
     const userPosts = await Post.findById(req.params.id);
