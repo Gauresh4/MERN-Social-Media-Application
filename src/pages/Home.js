@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Posts from "../components/profile/Posts";
 import Saved from "../components/profile/Saved";
+import Followers from "../components/profile/Followers";
 import { BsThreeDots } from "react-icons/bs";
 import { FaRegHeart } from "react-icons/fa";
 import { FaRegComment } from "react-icons/fa";
 import { PiPaperPlaneRightFill } from "react-icons/pi";
 import { FaRegBookmark } from "react-icons/fa";
+import { IoMdRefresh } from "react-icons/io";
 
 import Signup from "./Register";
 const Home = () => {
@@ -16,7 +18,7 @@ const Home = () => {
   return (
     <div>
       <div className="flex justify-center">
-        <div className="bg-blue-500 w-[700px]">
+        <div className="bg-white w-[700px] mt-2">
           <Posts />
           <div className="flex items-center">
             <div className="w-10 h-10 ml-1 mb-2 mr-1 rounded-full overflow-hidden">
@@ -76,9 +78,42 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="bg-blue-300 w-[400px]">
+        {/* <div className="bg-blue-300 w-[400px]">
           <div>Profile</div>
           <div>Follower</div>
+        </div> */}
+        <div className="bg-white w-[400px] mt-2 ml-2">
+          <div className="p-2">
+            <div className="flex items-center">
+              <div className="text-3xl cursor-pointer">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/5/50/User_icon-cp.svg"
+                  alt=""
+                  className="md:w-[50px] md:h-12 h-7 w-7 rounded-full overflow-hidden"
+                />
+              </div>
+              <div className="flex items-center justify-between w-full">
+                <div className="">
+                  <p className="m-0 text-[11px] font-semibold">Username</p>
+                  <p className="m-0 text-[11px] font-semibold">Full name</p>
+                </div>
+              </div>
+            </div>
+            <div className="flex justify-between mx-2 mt-2">
+              <p className="text-[13px] font-semibold text-blue-700 ">
+                Recommendations
+              </p>
+              <div className="md:text-[17px] text-xl text-slate-700 hover:text-green-500  cursor-pointer">
+                <IoMdRefresh />
+              </div>
+            </div>
+            <Followers />
+            <Followers />
+            <Followers />
+            <Followers />
+            <Followers />
+            <Followers />
+          </div>
         </div>
       </div>
 

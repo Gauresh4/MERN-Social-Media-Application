@@ -127,6 +127,7 @@ const Header = () => {
                     Notifications
                   </Link>
                 </nav>
+
                 {!userReducerData.user ? (
                   <Link
                     to={"/login"}
