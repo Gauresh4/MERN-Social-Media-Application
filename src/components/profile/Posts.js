@@ -12,8 +12,8 @@ const Posts = () => {
     dispatch(bufferReducer(postPopUp));
   };
   return (
-    <div className="bg-slate-400 m-2">
-      <div className="p-1 border">
+    <div className="bg-white m-2">
+      <div className="p-1 border-2">
         <div
           className="flex items-center"
           onClick={() => dispatch(bufferReducer(true))}
