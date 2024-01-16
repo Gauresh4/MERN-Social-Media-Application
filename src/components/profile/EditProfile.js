@@ -33,6 +33,32 @@ const EditProfile = () => {
           </div>
         </div>
       </div>
+
+      <nav className="bg-grey p-4">
+        <div className="flex items-center justify-center">
+          <div className="flex space-x-4">
+            <button
+              id="postBtn"
+              className="text-black focus:outline-none hover:bg-blue-600 px-4 py-2 rounded transition"
+            >
+              Post
+            </button>
+            <button
+              id="saveBtn"
+              className="text-black focus:outline-none hover:bg-blue-600 px-4 py-2 rounded transition"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </nav>
+      <div>
+        <img
+          className="w-40 h-40 object-cover ml-2 mt-2"
+          src="https://picsum.photos/800/400?image=1080"
+          alt="post image"
+        ></img>
+      </div>
     </div>
   );
 };
