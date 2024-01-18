@@ -296,10 +296,10 @@ exports.unSavePost = async (req, res) => {
 exports.getAllSavedPosts = async (req, res) => {
   const loggedInUser = await User.findById(req._id).populate("saved");
 
-  const savedPosts = loggedInUser.saved;
+  const savedPosts = await Post.find();
 
   return res.status(200).send({
-    savePosts: savedPosts,
+    posts: savedPosts,
     result: savedPosts.length,
   });
 };

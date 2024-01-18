@@ -155,3 +155,43 @@ exports.unfollowUser = async (req, res) => {
     });
   }
 };
+
+exports.suggestionsUser = async (req, res) => {
+  try {
+    const currentUserId = req._id;
+    const currentUser = await User.findOne(
+      { _id: currentUserId },
+      { following: true }
+    );
+
+    const suggestionUsers = await User.find(
+      {
+        _id: { $in: currentUser.following },
+      },
+      {
+        following: true,
+        followers: true,
+      }
+    );
+
+    let suggestionUserIds = [];
+    suggestionUsers.forEach((suggestionUser) => {
+      suggestionUserIds = [
+        ...suggestionUserIds,
+        ...suggestionUser.followers,
+        ...suggestionUser.following,
+      ];
+    });
+
+    // remove duplicate ids
+    suggestionUserIds = new Set(suggestionUserIds);
+    suggestionUserIds = Array.from(suggestionUserIds);
+
+    const users = await User.find({ _id: { $in: suggestionUserIds } });
+    return res.status(200).json({
+      users,
+    });
+  } catch (err) {
+    return res.status(500).send(err.message);
+  }
+};

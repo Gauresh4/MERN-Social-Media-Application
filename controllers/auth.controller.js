@@ -97,7 +97,7 @@ exports.login = async (req, res) => {
   user.password = "";
   res.status(200).send({
     msg: "Login Success!",
-    accesss_token: token,
+    access_token: token,
     user: user,
   });
 };

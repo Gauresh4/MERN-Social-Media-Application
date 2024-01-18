@@ -30,4 +30,10 @@ router.patch(
   userController.unfollowUser
 );
 
+router.get(
+  "/suggestionsUser",
+  authMiddleware.verifyToken,
+  userController.suggestionsUser
+);
+
 module.exports = router;
