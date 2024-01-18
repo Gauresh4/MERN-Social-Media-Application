@@ -10,7 +10,7 @@ import { Provider } from "react-redux";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Profile from "./components/profile/EditProfile";
-import EditProfile from "./components/profile/EditProfileBio";
+
 import toast, { Toaster } from "react-hot-toast";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
