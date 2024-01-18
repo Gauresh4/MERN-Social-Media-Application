@@ -58,14 +58,12 @@ const Login = () => {
   const handleSignUp = () => {
     dispatch(isSignupReducer());
   };
+
   return (
     <div className="p-3 md:p-4  ">
       <div className="w-full max-w-sm bg-white mx-auto flex-col p-4 ">
-        {/* <h1 className='text-center text-2xl font-bold'>Signup</h1> */}
-        <span className="text-xl font-bold flex justify-center">MERNY</span>
+        <span className="text-xl font-bold flex justify-center ">MERNY</span>
         <form className="w-full py-3 flex flex-col" onSubmit={handleSubmit}>
-          {/* <form className="w-full py-3 flex flex-col"> */}
-
           <label htmlFor="email">Email address</label>
           <input
             type="email"
