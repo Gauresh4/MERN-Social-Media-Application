@@ -1,7 +1,36 @@
 import React from "react";
+import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { followUnfollowReducer } from "../../store/slices/UserSlice";
 
-const Followers = ({ username, fullname, avatar, status }) => {
+const Followers = ({ username, fullname, avatar, status, id, token }) => {
   console.log(username);
+  const dispatch = useDispatch();
+  const userStatus = status === "Follow" ? "follow" : "unfollow";
+  console.log(token);
+  const userReducerData = useSelector(
+    (state) => state.users.followUnfollow.data.updatedUser
+  );
+  console.log(userReducerData);
+  const handleFollowUnfollow = async () => {
+    try {
+      const fetchData = await axios.patch(
+        `${process.env.REACT_APP_SERVER_DOMAIN}/user/${id}/${userStatus}`,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-auth-token": token, // Include your actual token value
+          },
+        }
+      );
+
+      dispatch(followUnfollowReducer(fetchData));
+      console.log(fetchData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
   return (
     <div className="flex items-center my-2">
       <div className="text-3xl cursor-pointer">

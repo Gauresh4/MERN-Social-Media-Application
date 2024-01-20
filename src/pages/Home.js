@@ -18,13 +18,16 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const [postData, setPostData] = useState([]);
-  console.log(postData);
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([]);
 
   const userReducerData = useSelector((state) => state.users.user);
-  console.log(postData);
   const token = userReducerData.access_token;
+  const followUnfoReducer = useSelector(
+    (state) => state.users.followUnfollow.data.updatedUser
+  );
+  const nFollwer = followUnfoReducer.followers.length;
+  const nFollwing = followUnfoReducer.following.length;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,10 +55,39 @@ const Home = () => {
     // Call the fetchData function when the component mounts
     fetchData();
   }, []);
+
+  /*Get recommended user */
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Make a GET request using Axios
+
+        const fetchUsers = await axios.get(
+          `${process.env.REACT_APP_SERVER_DOMAIN}/uv/suggestionsUser`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "x-auth-token": token, // Include your actual token value
+            },
+          }
+        );
+        console.log(fetchUsers);
+        // Update the state with the received data
+        setFollowers(fetchUsers.data.users);
+        setFollowing(fetchUsers.data.users[0].following);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    // Call the fetchData function when the component mounts
+    fetchData();
+  }, [nFollwer, nFollwing]);
+  console.log(following);
   return (
     <div>
       <div className="flex justify-center">
-        <div className="bg-white w-[700px] mt-2">
+        <div className="bg-white w-[700px]  mt-2">
           <Posts
             username={userReducerData.user.username}
             userImage={userReducerData.user.avatar}
@@ -68,15 +100,16 @@ const Home = () => {
                   <div className="flex items-center">
                     <div className="w-10 h-10 ml-1 mb-2 mr-1 rounded-full overflow-hidden">
                       <img
-                        className="w-full h-full object-cover"
-                        src={post.user.avatar}
+                        // className="w-full h-full object-cover"
+                        className="md:w-10 md:h-10 h-7 w-7 rounded-full overflow-hidden"
+                        src={post.user[0].avatar}
                         alt="Circle Image"
                       />
                     </div>
                     <div className="flex items-center justify-between w-full">
                       <div className="text-left">
                         <p className="text-gray-700 text-base">
-                          {post.user.username}
+                          {post.user[0].username}
                         </p>
                         <p className="text-gray-700 text-xs">
                           a few seconds ago
@@ -130,24 +163,25 @@ const Home = () => {
             })}
         </div>
 
-        {/* <div className="bg-blue-300 w-[400px]">
-          <div>Profile</div>
-          <div>Follower</div>
-        </div> */}
         <div className="bg-white w-[400px] mt-2 ml-2">
           <div className="p-2">
             <div className="flex items-center">
               <div className="text-3xl cursor-pointer">
                 <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/5/50/User_icon-cp.svg"
+                  src={userReducerData.user.avatar}
                   alt=""
                   className="md:w-[50px] md:h-12 h-7 w-7 rounded-full overflow-hidden"
                 />
               </div>
+
               <div className="flex items-center justify-between w-full">
                 <div className="">
-                  <p className="m-0 text-[11px] font-semibold">Username</p>
-                  <p className="m-0 text-[11px] font-semibold">Full name</p>
+                  <p className="m-0 text-[11px] font-semibold">
+                    {userReducerData.user.username}
+                  </p>
+                  <p className="m-0 text-[11px] font-semibold">
+                    {userReducerData.user.fullname}
+                  </p>
                 </div>
               </div>
             </div>
@@ -159,12 +193,33 @@ const Home = () => {
                 <IoMdRefresh />
               </div>
             </div>
-            <Followers />
-            <Followers />
-            <Followers />
-            <Followers />
-            <Followers />
-            <Followers />
+            {followers[0] &&
+              followers.map((user) => {
+                return (
+                  <Followers
+                    token={token}
+                    username={user.username}
+                    fullname={user.fullname}
+                    avatar={user.avatar}
+                    id={user._id}
+                    status="Follow"
+                  />
+                );
+              })}
+
+            {following[0] &&
+              following.map((user) => {
+                return (
+                  <Followers
+                    token={token}
+                    username={user.username}
+                    fullname={user.fullname}
+                    avatar={user.avatar}
+                    id={user._id}
+                    status="Unfollow"
+                  />
+                );
+              })}
           </div>
         </div>
       </div>

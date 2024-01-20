@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
 import { imageToBase64 } from "../../utility/imageToBase64";
+import { useSelector, useDispatch } from "react-redux";
 const EditProfile = () => {
   const navigate = useNavigate();
   const handleProfile = async () => {
@@ -19,6 +20,11 @@ const EditProfile = () => {
     setShowEditProfileBio((prev) => !prev);
   };
 
+  const userReducerData = useSelector((state) => state.users.user);
+  const followUnfoReducer = useSelector(
+    (state) => state.users.followUnfollow.data.updatedUser
+  );
+  console.log(userReducerData);
   const [data, setData] = useState({
     fullname: "",
     mobile: "",
@@ -42,23 +48,29 @@ const EditProfile = () => {
     <div>
       <div className="flex flex-col items-center justify-center w-screen mt-2">
         <div className="flex items-center">
-          <div className="w-50 h-50 ml-1 mb-2 mr-1 rounded-full overflow-hidden">
+          <div className="w-[100px] h-[100px] ml-1 mb-2 mr-1 rounded-full overflow-hidden">
             <img
               className="w-full h-full object-cover"
-              src="https://via.placeholder.com/150"
+              src={userReducerData.user.avatar}
               alt="Circle Image"
             />
           </div>
           <div className="flex items-center justify-between w-full">
             <div className="text-left ">
-              <p className="text-gray-700 text-base">Gauresh</p>
+              <p className="text-gray-700 text-base">
+                {userReducerData.user.username}
+              </p>
               <div className="flex items-center justify-between w-full">
-                <p className="text-gray-700 text-xs">2 Followers</p>
-                <p className="text-gray-700 text-xs">2 Following</p>
+                <p className="text-gray-700 text-xs">
+                  {userReducerData.user.followers.length} Followers
+                </p>
+                <p className="text-gray-700 text-xs">
+                  {userReducerData.user.following.length} Following
+                </p>
               </div>
               <div className="flex items-center">
                 <FaLocationDot />
-                <p className="text-xs">h2 hiu a</p>
+                <p className="text-xs">{userReducerData.user.address}</p>
               </div>
             </div>
             <div className="bg-blue-400 w-64 rounded-lg">
@@ -194,18 +206,22 @@ const EditProfile = () => {
       <nav className="bg-grey p-4">
         <div className="flex items-center justify-center">
           <div className="flex space-x-4">
-            <button
-              id="postBtn"
-              className="text-black focus:outline-none hover:bg-blue-600 px-4 py-2 rounded transition"
-            >
-              Post
-            </button>
-            <button
-              id="saveBtn"
-              className="text-black focus:outline-none hover:bg-blue-600 px-4 py-2 rounded transition"
-            >
-              Save
-            </button>
+            <div className="bg-blue-400 ">
+              <button
+                id="postBtn"
+                className="text-black focus:outline-none hover:bg-blue-600 px-4 py-2 rounded transition"
+              >
+                Post
+              </button>
+            </div>
+            <div className="bg-blue-400 ">
+              <button
+                id="saveBtn"
+                className="text-black focus:outline-none hover:bg-blue-600 px-4 py-2 rounded transition"
+              >
+                Save
+              </button>
+            </div>
           </div>
         </div>
       </nav>
