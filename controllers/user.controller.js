@@ -91,14 +91,15 @@ exports.followUser = async (req, res) => {
 
   try {
     if (loggedInUser.following.includes(userToFollow._id)) {
+      console.log("hi");
       return res.status(200).send({
         msg: "You followed this user.",
       });
     }
 
-    loggedInUser.following.push(userToFollow);
+    loggedInUser.following.push(userToFollow._id);
     await loggedInUser.save();
-    userToFollow.followers.push(loggedInUser);
+    userToFollow.followers.push(loggedInUser._id);
     await userToFollow.save();
 
     return res.status(200).send({

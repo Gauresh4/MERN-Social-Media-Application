@@ -31,7 +31,7 @@ router.patch(
 );
 
 router.get(
-  "/suggestionsUser",
+  "/uv/suggestionsUser",
   authMiddleware.verifyToken,
   userController.suggestionsUser
 );
