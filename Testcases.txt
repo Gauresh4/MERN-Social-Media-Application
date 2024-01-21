@@ -1,0 +1,48 @@
+Successful Authentication:
+
+Verify that the login API returns a valid authentication token for correct credentials.
+Ensure the token is valid for a specified duration.
+
+
+Invalid Credentials:
+
+Test the API response when incorrect username or email is provided.
+Test the API response when incorrect password is provided.
+
+Token Security:
+
+Validate that the API enforces proper token validation.
+Ensure that expired tokens are rejected.
+Test token refresh functionality if applicable.
+
+Rate Limiting and Security:
+
+Verify that the API has proper rate-limiting mechanisms to prevent brute force attacks.
+Test for security measures against common vulnerabilities like Mongodb and cross-site scripting.
+
+Error Handling:
+
+Test the API's response for various error scenarios (e.g., server errors, malformed requests).
+Ensure that error messages do not reveal sensitive information.
+Multi-factor Authentication (if applicable):
+
+If the app supports multi-factor authentication, test the API's handling of multi-factor authentication requests
+
+Test Cases for Posting:
+
+Create Post:
+
+Verify that a user can successfully create a post with text.
+Test creating a post with a combination of text and multimedia elements (images, videos, links).
+Ensure that the post character limit is enforced.
+
+
+
+Edit and Delete Post:
+
+Validate the ability to edit the content of an existing post.
+Verify that users can delete their own posts.
+Ensure that deleted posts are removed from the user's profile and others' feeds.
+
+
+
